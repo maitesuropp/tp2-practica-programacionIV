@@ -18,4 +18,7 @@ describe('NotService - getNote (Ejercicio 3)', () => {
         });
     expect(service.getNote(note.id)).toEqual(note);
     });
+    it ('devuelve undefined si no existe la nota', () => {
+        expect(service.getNote(999)).toBeUndefined();
+    });
 });
