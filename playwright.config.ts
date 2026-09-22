@@ -12,7 +12,7 @@ export default defineConfig({
   webServer: {
     command: 'npm run start:e2e',
     url: 'http://localhost:4000/health',
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: true,
     timeout: 20_000
   }
 });
