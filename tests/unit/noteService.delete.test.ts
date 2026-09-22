@@ -23,4 +23,7 @@ describe('NoteService - deleteNote (Ejercicio 5)', () => {
         expect(deleted).toBe(true);
         expect(service.listNotes()).toHaveLength(0);
     });
+    it ('devuelve false si no existe la nota', () => {
+        expect(service.deleteNote(999)).toBe(false);
+    })
 });
