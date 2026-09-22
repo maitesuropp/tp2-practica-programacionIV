@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { NoteServiceImpl } from '../../src/services/NoteService';
 import { SqliteNoteRepository } from '../../src/repositories/NoteRepository';
 import { createDb } from '../../src/db/connection';
@@ -10,6 +10,9 @@ vi.mock('../../src/services/notificationService', () => ({
 import { notify } from '../../src/services/notificationService';
 
 describe('NoteService - notify (Ejercicio 6)', () => {
+    beforeEach(() => {
+    vi.clearAllMocks();
+});
 
     it('notifica cuando la nota está fijada', () => {
         const db = createDb(':memory:');
@@ -24,5 +27,16 @@ describe('NoteService - notify (Ejercicio 6)', () => {
 
         expect(notify).toHaveBeenCalledWith(note);
     });
+    it('no notifica cuando la nota no está fijada', () => {
+    const db = createDb(':memory:');
+    const repo = new SqliteNoteRepository(db);
+    const service = new NoteServiceImpl(repo);
 
+    service.createNote({
+        title: 'Nota normal',
+        content: 'Esto no está fijado'
+    });
+
+    expect(notify).not.toHaveBeenCalled();
+});
 });
