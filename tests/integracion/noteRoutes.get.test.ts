@@ -25,8 +25,6 @@ describe('GET /notes/:id (Ejercicio 3)', () => {
 
         const response = await request(app)
             .get('/notes/999');
-
         expect(response.status).toBe(404);
     });
-
 });
